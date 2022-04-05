@@ -1,0 +1,53 @@
+.student {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+.student_container {
+  height: 89vh;
+}
+.student_container_top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.student_conatiner_studentList {
+  flex: 0.5;
+  margin-bottom: 25px;
+  overflow-y: hidden;
+  background: #fbfbfb;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+.student_application_box {
+  flex: 0.5;
+  background: #fbfbfb;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+.student_scroll {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 15px;
+}
+.student_list_item {
+  background: #fff;
+  display: flex;
+  padding: 5px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 20px;
+}
+
+.student_form {
+  width: 100%;
+  height: 100%;
+  padding-top: 25px;
+}

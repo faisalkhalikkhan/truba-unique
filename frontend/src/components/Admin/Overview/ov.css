@@ -1,0 +1,16 @@
+.overview {
+  width: 100%;
+  background-color: #f4f4ff;
+  height: 100%;
+  padding: 10px;
+}
+.overview_top {
+  display: flex;
+  justify-content: space-between;
+}
+.overview_search_box {
+  margin-top: 10px;
+}
+.graph {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
