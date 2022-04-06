@@ -21,8 +21,18 @@ const Login = () => {
       })
       .then((response) => {
         if (response.data.length > 0) {
-          message.success("Login Successfull");
-          nevigate("/student-dashboard");
+         
+          if (response.data[0]["role"] == "student") {
+            message.success("Login Successfull");
+            nevigate("/student-dashboard");
+          }
+          else if (response.data[0]["role"] == "teacher") {
+            message.success("Login Successfull");
+            nevigate("/teacher-dashboard");
+          }
+          else{
+            message.error("user not found");
+          }
         } else message.error("user not found");
       })
       .catch((e) => {

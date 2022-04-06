@@ -1,7 +1,13 @@
 import { SearchOutlined } from "@ant-design/icons/lib/icons";
 import React from "react";
 import "./Td.css";
-import { Progress } from "antd";
+import axios from "axios";
+
+
+axios
+  .get("http://localhost:5000/admin-power/get-all-users")
+  .then((response) => console.log(response.data))
+
 
 const TDashboardContent = () => {
   return (
