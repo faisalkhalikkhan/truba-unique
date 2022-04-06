@@ -94,6 +94,7 @@ router.put("/update-user/:id", (req, res) => {
         password: req.body.password,
         role: req.body.role,
         adminId: req.session.adminId,
+        picture : req.body.picture
     };
 
     // const user = new user(body);
@@ -111,11 +112,20 @@ router.post('/auth/v1/user',(req,res)=>{
         password: password
     }).then(response => {
         if(response) {
-            req.session.studentId = response.id;
+            if(response.role === 'admin'){
+                req.session.adminID = response[0]._id
+                console.log("admin id > ",req.session.studentId);
+            }
+            else if(response.role === 'teacher'){
+                req.session.teacherId = response[0]._id;
+                console.log("teacher id > ",req.session.studentId);
+            }
+            else{
+                req.session.studentId = response[0]._id;
+                console.log("student id > ",req.session.studentId);
+            }
             res.status(201).json(response)
-
-            console.log("Student Responce > ",response);
-            console.log("Student id > ",req.session.studentId);
+            
         }
     })
     .catch(err => res.status(501).json(err.message))

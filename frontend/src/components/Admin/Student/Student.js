@@ -14,9 +14,9 @@ const Student = () => {
         }}
       >
         <h2>Student Panel</h2>
-        <button  className="logout_btn">Add Student</button>
+        <button  className="logout_btn" onClick={()=>setAddStudent(!showAddStudent)}>Add Student</button>
       </div>
-      <div  className="student_container">
+      <div style={{ display: `${showAddStudent ? "block" : "none"}` }}  className="student_container">
         <div className="student_container_top">
           <div className="student_conatiner_studentList">
             <div className="student_conatiner_studentList_head">
@@ -97,7 +97,7 @@ const Student = () => {
         </div>
       </div>
 
-      <div style={{ display: "none" }} className="student_form">
+      <div style={{ display: `${showAddStudent ? "none" : "block"}` }} className="student_form">
         <AddStudent />
       </div>
     </div>

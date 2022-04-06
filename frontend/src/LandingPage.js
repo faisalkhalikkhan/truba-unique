@@ -8,6 +8,7 @@ import CarouselMain from "./components/Carousel/CarouselMain";
 import { useEffect, useState } from "react";
 import MobileC from "./components/Carousel/MobileC";
 import NewFooter from "./reuseable-components/new-footer/NewFooter";
+
 const LandingPage = () => {
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches
@@ -21,7 +22,6 @@ const LandingPage = () => {
   return (
     <div>
       <MenuBar />
-
       {matches && <CarouselMain />}
       {!matches && <MobileC />}
       <About />
