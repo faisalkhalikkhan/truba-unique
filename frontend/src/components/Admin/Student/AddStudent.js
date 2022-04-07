@@ -37,7 +37,7 @@ const props = {
   onDrop(e) {
     console.log("Dropped files", e.dataTransfer.files);
   },
-};
+  };
 
 const StudentGeneralInfo = () => {
   return (
