@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const newUser = mongoose.Schema({
   name: String,
+  email:String,
   username: {
     type: String,
     required: [true, "Username required."],

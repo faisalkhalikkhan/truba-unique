@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 const newStudentAccounts = mongoose.Schema({
     studentId: String,
+    collegeTuitionFees: Number,
+    collegeBusFees : Number,
+    developmentFees :Number,
+    miscellaneousFees : Number,
     totalFees: Number,
     paidAmount: Number,
     libraryFine: Number,

@@ -9,6 +9,10 @@ router.post('/update/:id', async (req, res) => {
         paidAmount: req.body.paidAmount,
         libraryFine: req.body.libraryFine,
         otherFine: req.body.otherFine,
+        collegeTuitionFees: req.body.collegeTuitionFees,
+        collegeBusFees : req.body.collegeBusFees,
+        developmentFees :req.body.developmentFees,
+        miscellaneousFees : req.body.miscellaneousFees,
         conditionOfAdmission: req.body.conditionOfAdmission
     })
         .then((response) => res.status(201).json(response))

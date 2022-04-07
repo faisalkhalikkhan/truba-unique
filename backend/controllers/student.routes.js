@@ -12,8 +12,9 @@ router.post('/update-student/:id',(req,res)=>{
         address: req.body.address,
         phone: req.body.phone,
         alternativePhone: req.body.alternativePhone,
-        teachers: [req.body.teachers],
-        documents: [req.body.documents],
+        teachers: req.body.teachers,
+        documents: req.body.documents,
+        education: req.body.education
     })
     .then((response) => res.status(201).json(response))
     .catch((err) => res.status(501).json(err.message));

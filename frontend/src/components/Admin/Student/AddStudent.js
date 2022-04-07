@@ -17,8 +17,27 @@ import axios from "axios";
 const { Dragger } = Upload;
 const { RangePicker } = DatePicker;
 const { Option } = Select;
+
 let listOfHistory = [];
 let historyID = 0;
+let StudentPictureId = 0;
+
+let student_name = "";
+let student_username = "";
+let student_password = "";
+let student_number = "";
+let student_numberAlter=""
+let student_address = "";
+let student_eamil = "";
+let EducationList;
+
+let CollegeTuitionFees = 0;
+let DevelopmentFees = 0;
+let CollegeBusFees = 0;
+let MiscellaneousFees = 0;
+
+let userID;
+
 
 const changeHandler = async () => {
   const fileInput = document.querySelector("#fileInput");
@@ -26,12 +45,55 @@ const changeHandler = async () => {
   axios.put("https://personal-eewexkfl.outsystemscloud.com/TrubaErp/rest/Image_To_ID/Image_To_ID", fileInput.files[0])
     .then((response) => {
       console.log(response.data)
+      StudentPictureId = response.data["ImageID"]
+      console.log(StudentPictureId)
     })
+}
+
+const submitData = () => {
+  // Add User
+  const addUserbody = {
+    name: student_name,
+    username: student_username,
+    password: student_password,
+    picture: StudentPictureId,
+    role: "student"
+  }
+  axios.post("http://localhost:5000/admin-power/add-user", addUserbody)
+    .then((response) => {
+      message.success("addUserbody Processing complete!")
+      userID = response.data._id;
+      console.log(response.data._id)
+      console.log("=====================================")
+    })
+
+  
+  
+    // update Student by userId 
+
+  const addStudentbody = {
+    picture:2,
+    email:student_eamil,
+    address:student_address,
+    phone:student_number,
+    alternativePhone : student_numberAlter,
+    education: EducationList
+}
+  axios.post(`http://localhost:5000/student/update-student/${userID}`, addStudentbody)
+    .then((response) => {
+      message.success("addUserbody Processing complete!")
+      console.log(response.data)
+      console.log("=====================================")
+    })
+
+
 }
 
 
 
 const StudentGeneralInfo = () => {
+
+
   return (
     <>
       <div className="add_student_top_general_info">
@@ -49,22 +111,26 @@ const StudentGeneralInfo = () => {
         </Dragger> */}
         <input type="file" name="file" id="fileInput" accept='image/*' onChange={changeHandler} />
       </div>
-      <div className="add_student_middle_general_info">
+      <div className="add_student_middle_general_info" style={{ "paddingLeft": "15px", "paddingRight": "15px" }}>
         <div className="add_student_middle_general_info_input">
           <h3>Student Name</h3>
-          <Input />
+          <Input id="student_name" onChange={(e) => student_name = e.target.value} />
         </div>
         <div className="add_student_middle_general_info_input">
           <h3>Student Email</h3>
-          <Input />
+          <Input id="student_email" onChange={(e) => student_eamil = e.target.value} />
         </div>
         <div className="add_student_middle_general_info_input">
           <h3>Student Phone Number</h3>
-          <Input />
+          <Input id="student_number" onChange={(e) => student_number = e.target.value} />
+        </div>
+        <div className="add_student_middle_general_info_input">
+          <h3>Student Alternet Phone Number</h3>
+          <Input id="student_number" onChange={(e) => student_numberAlter = e.target.value} />
         </div>
         <div className="add_student_middle_general_info_input">
           <h3>Student Address</h3>
-          <Input.TextArea />
+          <Input.TextArea id="student_address" onChange={(e) => student_address = e.target.value} />
         </div>
       </div>
     </>
@@ -98,8 +164,8 @@ const EducationHistory = () => {
     setPercentage(0);
     setStart("");
     setEnd("");
-
-    console.log(listOfHistory.length);
+    EducationList = listOfHistory
+    console.log(EducationList);
   };
 
   function onChange(value) {
@@ -109,6 +175,10 @@ const EducationHistory = () => {
 
   function onSearch(val) {
     console.log("search:", val);
+  }
+
+  const removeItem = (id) => {
+
   }
   return (
     <div className="education-history">
@@ -141,6 +211,7 @@ const EducationHistory = () => {
             <Option value="10th">10th</Option>
             <Option value="12th">12th</Option>
             <Option value="Diploma">Diploma</Option>
+            <Option value="Graduation">Graduation</Option>
           </Select>
         </div>
       </div>
@@ -179,13 +250,14 @@ const EducationHistory = () => {
               <h3>{item.course}</h3>
               <h4>{item.school}</h4>
               <h4>{item.percentage} &#x25;</h4>
+              <h4>{item.id} &#x25;</h4>
               <Button
                 className="logout_btn"
                 type="primary"
                 shape="circle"
                 icon={<DeleteFilled />}
                 size="middle"
-              />
+                onClick={removeItem(item.id)} />
             </div>
           ))
         ) : (
@@ -205,14 +277,14 @@ const FinalPage = () => {
           className="add_student_middle_general_info_input"
         >
           <h3>College Tuition Fees</h3>
-          <Input />
+          <Input onChange={(e) => CollegeTuitionFees = e.target.value} />
         </div>
         <div
           style={{ flex: "0.4" }}
           className="add_student_middle_general_info_input"
         >
           <h3>College Bus Fees</h3>
-          <Input />
+          <Input onChange={(e) => CollegeBusFees = e.target.value} />
         </div>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -221,25 +293,25 @@ const FinalPage = () => {
           className="add_student_middle_general_info_input"
         >
           <h3>Development Fees</h3>
-          <Input />
+          <Input onChange={(e) => DevelopmentFees = e.target.value} />
         </div>
         <div
           style={{ flex: "0.4" }}
           className="add_student_middle_general_info_input"
         >
           <h3>Miscellaneous Fees</h3>
-          <Input />
+          <Input onChange={(e) => MiscellaneousFees = e.target.value} />
         </div>
       </div>
       <Divider />
       <div className="add_student_middle_general_info_input">
         <h3>Student ID</h3>
-        <Input />
+        <Input onChange={(e) => student_username = e.target.value} />
       </div>
 
       <div className="add_student_middle_general_info_input">
         <h3>Student Password</h3>
-        <Input />
+        <Input onChange={(e) => student_password = e.target.value} />
       </div>
     </div>
   );
@@ -289,7 +361,7 @@ const AddStudent = () => {
         {current === steps.length - 1 && (
           <Button
             type="primary"
-            onClick={() => message.success("Processing complete!")}
+            onClick={submitData}
           >
             Done
           </Button>

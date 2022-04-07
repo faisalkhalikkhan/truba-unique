@@ -94,7 +94,8 @@ router.put("/update-user/:id", (req, res) => {
         password: req.body.password,
         role: req.body.role,
         adminId: req.session.adminId,
-        picture : req.body.picture
+        picture : req.body.picture,
+
     };
 
     // const user = new user(body);
