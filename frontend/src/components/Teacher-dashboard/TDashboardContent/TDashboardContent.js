@@ -4,9 +4,9 @@ import "./Td.css";
 import axios from "axios";
 
 
-axios
-  .get("http://localhost:5000/admin-power/get-all-users")
-  .then((response) => console.log(response.data))
+// axios
+//   .get("http://localhost:5000/admin-power/get-all-users")
+//   .then((response) => console.log(response.data))
 
 
 const TDashboardContent = () => {

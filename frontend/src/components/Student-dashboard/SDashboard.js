@@ -1,8 +1,5 @@
 import Avatar from "antd/lib/avatar/avatar";
 import React from "react";
-import Dashboard from "./Dashboard/Dashboard";
-import TimeTable from "./TimeTable/TimeTable";
-import ApplyForLeave from "./ApplyForLeave/ApplyForLeave";
 import "./sd.css";
 
 import { Link, Outlet } from "react-router-dom";

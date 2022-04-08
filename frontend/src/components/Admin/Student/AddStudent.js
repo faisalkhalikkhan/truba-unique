@@ -12,38 +12,146 @@ import {
 } from "antd";
 import "./as.css";
 import { DeleteFilled, InboxOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 const { Dragger } = Upload;
 const { RangePicker } = DatePicker;
 const { Option } = Select;
+
 let listOfHistory = [];
 let historyID = 0;
-const props = {
-  name: "file",
-  multiple: true,
-  action:
-    "https://personal-eewexkfl.outsystemscloud.com/TrubaErp/rest/Image_To_ID/Image_To_ID",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
+let StudentPictureId = 0;
+
+let student_name = "";
+let student_username = "";
+let student_password = "";
+let student_number = "";
+let student_numberAlter = ""
+let student_address = "";
+let student_eamil = "";
+let EducationList;
+
+let CollegeTuitionFees = 0;
+let DevelopmentFees = 0;
+let CollegeBusFees = 0;
+let MiscellaneousFees = 0;
+let paidAmount = 0
+let libraryFine = 0
+let otherFine = 0
+let conditionOfAdmission = 0
+
+let CreateUserID;
+
+
+const changeHandler = async () => {
+  const fileInput = document.querySelector("#fileInput");
+  console.log(fileInput.files[0])
+  axios.put("https://personal-eewexkfl.outsystemscloud.com/TrubaErp/rest/Image_To_ID/Image_To_ID", fileInput.files[0])
+    .then((response) => {
+      message.success("Picture Uploaded")
+      console.log(response.data)
+      StudentPictureId = response.data["ImageID"]
+      console.log(StudentPictureId)
+    })
+}
+
+const submitData = () => {
+  function CreateUser() {
+    // Add User
+    const addUserbody = {
+      name: student_name,
+      username: student_username,
+      password: student_password,
+      picture: StudentPictureId,
+      role: "student"
     }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
+    axios.post("http://localhost:5000/admin-power/add-user", addUserbody)
+      .then((response) => {
+        message.success("addUserbody Processing complete!")
+        CreateUserID = response.data._id;
+        console.log(response.data._id)
+        console.log("=====================================")
+        UserDetails()
+      })
+  }
+  CreateUser()
+  function UserDetails() {
+    // update Student by CreateUserID 
+
+    const addStudentbody = {
+      picture: 2,
+      email: student_eamil,
+      address: student_address,
+      phone: student_number,
+      alternativePhone: student_numberAlter,
+      education: EducationList
     }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
-};
+    axios.post(`http://localhost:5000/student/update-student/${CreateUserID}`, addStudentbody)
+      .then((response) => {
+        message.success("Student Details Submited!")
+        console.log(response.data)
+        console.log("=====================================")
+        UpdateAccount()
+      })
+  }
+  function UpdateAccount() {
+    //update Account Details
+    const addStudentAccountbody = {
+      collegeTuitionFees: CollegeTuitionFees,
+      collegeBusFees: DevelopmentFees,
+      developmentFees: CollegeBusFees,
+      miscellaneousFees: MiscellaneousFees,
+      totalFees: CollegeTuitionFees + DevelopmentFees + CollegeBusFees + MiscellaneousFees,
+      paidAmount: paidAmount,
+      conditionOfAdmission: conditionOfAdmission
+    }
+    axios.post(`http://localhost:5000/accounts/update/${CreateUserID}`, addStudentAccountbody)
+      .then((response) => {
+        message.success("Student Account Details Submited!")
+        console.log(response.data)
+        console.log("=====================================")
+      })
+    SendWelcomeMail()
+  }
+
+  function SendWelcomeMail() {
+    // send welcome mail 
+    const mailBody = {
+      "To": student_eamil,
+      "Subject": "Account Details",
+      "TopHeading": `Welcome to Truba Group ${student_name} !
+      Your Account is just Created Congrats!`,
+      "Content": `Hi
+${student_name},
+Its a pleasure having you with us on board.we are so glad that you are here, and it is going to be a great academic year! Every day we work hand in hand with parents, teachers, educators and community members to improve Truba's education system for students of all backgrounds and abilities. Our new site reflects this cooperative relationship and the role that so many Trubians play in ensuring student success.         
+
+
+Your User-Id = ${student_username}
+Your Password = ${student_password}
+
+
+`,
+      "Regards": "Truba Group Of Institution",
+      "ContactUs": "https://www.trubainstitute.ac.in/"
+    }
+    axios.post(`https://personal-eewexkfl.outsystemscloud.com/TrubaErp/rest/SendWelcomeMsg/Email`, mailBody)
+      .then((response) => {
+        message.success("Student Mail Send!")
+        alert(`Account Details is send to ${student_eamil}`)
+        console.log(response.data)
+        console.log("=====================================")
+      })
+  }
+
+}
+
+
 
 const StudentGeneralInfo = () => {
   return (
     <>
       <div className="add_student_top_general_info">
-        <Dragger {...props}>
+        {/* <Dragger {...props}>
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>
@@ -54,24 +162,29 @@ const StudentGeneralInfo = () => {
             Support for a single upload. Strictly prohibit from uploading
             company data or other band files
           </p>
-        </Dragger>
+        </Dragger> */}
+        <input type="file" name="file" id="fileInput" accept='image/*' onChange={changeHandler} />
       </div>
-      <div className="add_student_middle_general_info">
+      <div className="add_student_middle_general_info" style={{ "paddingLeft": "15px", "paddingRight": "15px" }}>
         <div className="add_student_middle_general_info_input">
           <h3>Student Name</h3>
-          <Input />
+          <Input id="student_name" onChange={(e) => student_name = e.target.value} />
         </div>
         <div className="add_student_middle_general_info_input">
           <h3>Student Email</h3>
-          <Input />
+          <Input id="student_email" onChange={(e) => student_eamil = e.target.value} />
         </div>
         <div className="add_student_middle_general_info_input">
           <h3>Student Phone Number</h3>
-          <Input />
+          <Input id="student_number" onChange={(e) => student_number = e.target.value} />
+        </div>
+        <div className="add_student_middle_general_info_input">
+          <h3>Student Alternet Phone Number</h3>
+          <Input id="student_number" onChange={(e) => student_numberAlter = e.target.value} />
         </div>
         <div className="add_student_middle_general_info_input">
           <h3>Student Address</h3>
-          <Input.TextArea />
+          <Input.TextArea id="student_address" onChange={(e) => student_address = e.target.value} />
         </div>
       </div>
     </>
@@ -85,7 +198,7 @@ const EducationHistory = () => {
   const [startAt, setStart] = useState("");
   const [endAt, setEnd] = useState("");
 
-  useEffect(() => {}, [listOfHistory]);
+  useEffect(() => { }, [listOfHistory]);
 
   const printData = () => {
     listOfHistory = [
@@ -105,8 +218,8 @@ const EducationHistory = () => {
     setPercentage(0);
     setStart("");
     setEnd("");
-
-    console.log(listOfHistory.length);
+    EducationList = listOfHistory
+    console.log(EducationList);
   };
 
   function onChange(value) {
@@ -116,6 +229,10 @@ const EducationHistory = () => {
 
   function onSearch(val) {
     console.log("search:", val);
+  }
+
+  const removeItem = (id) => {
+
   }
   return (
     <div className="education-history">
@@ -148,6 +265,7 @@ const EducationHistory = () => {
             <Option value="10th">10th</Option>
             <Option value="12th">12th</Option>
             <Option value="Diploma">Diploma</Option>
+            <Option value="Graduation">Graduation</Option>
           </Select>
         </div>
       </div>
@@ -186,13 +304,14 @@ const EducationHistory = () => {
               <h3>{item.course}</h3>
               <h4>{item.school}</h4>
               <h4>{item.percentage} &#x25;</h4>
+              <h4>{item.id} &#x25;</h4>
               <Button
                 className="logout_btn"
                 type="primary"
                 shape="circle"
                 icon={<DeleteFilled />}
                 size="middle"
-              />
+                onClick={removeItem(item.id)} />
             </div>
           ))
         ) : (
@@ -212,14 +331,14 @@ const FinalPage = () => {
           className="add_student_middle_general_info_input"
         >
           <h3>College Tuition Fees</h3>
-          <Input />
+          <Input type={"number"} onChange={(e) => CollegeTuitionFees = e.target.value} />
         </div>
         <div
           style={{ flex: "0.4" }}
           className="add_student_middle_general_info_input"
         >
           <h3>College Bus Fees</h3>
-          <Input />
+          <Input type={"number"} onChange={(e) => CollegeBusFees = e.target.value} />
         </div>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -228,25 +347,39 @@ const FinalPage = () => {
           className="add_student_middle_general_info_input"
         >
           <h3>Development Fees</h3>
-          <Input />
+          <Input type={"number"} onChange={(e) => DevelopmentFees = e.target.value} />
         </div>
         <div
           style={{ flex: "0.4" }}
           className="add_student_middle_general_info_input"
         >
           <h3>Miscellaneous Fees</h3>
-          <Input />
+          <Input type={"number"} onChange={(e) => MiscellaneousFees = e.target.value} />
+        </div>
+        <div
+          style={{ flex: "0.4" }}
+          className="add_student_middle_general_info_input"
+        >
+          <h3>Paid Amount</h3>
+          <Input type={"number"} onChange={(e) => paidAmount = e.target.value} />
+        </div>
+        <div
+          style={{ flex: "0.4" }}
+          className="add_student_middle_general_info_input"
+        >
+          <h3>Condition Of Admission</h3>
+          <Input type={"text"} onChange={(e) => conditionOfAdmission = e.target.value} />
         </div>
       </div>
       <Divider />
       <div className="add_student_middle_general_info_input">
         <h3>Student ID</h3>
-        <Input />
+        <Input onChange={(e) => student_username = e.target.value} />
       </div>
 
       <div className="add_student_middle_general_info_input">
         <h3>Student Password</h3>
-        <Input />
+        <Input onChange={(e) => student_password = e.target.value} />
       </div>
     </div>
   );
@@ -296,7 +429,7 @@ const AddStudent = () => {
         {current === steps.length - 1 && (
           <Button
             type="primary"
-            onClick={() => message.success("Processing complete!")}
+            onClick={submitData}
           >
             Done
           </Button>
