@@ -26,7 +26,7 @@ let student_name = "";
 let student_username = "";
 let student_password = "";
 let student_number = "";
-let student_numberAlter=""
+let student_numberAlter = ""
 let student_address = "";
 let student_eamil = "";
 let EducationList;
@@ -35,8 +35,12 @@ let CollegeTuitionFees = 0;
 let DevelopmentFees = 0;
 let CollegeBusFees = 0;
 let MiscellaneousFees = 0;
+let paidAmount = 0
+let libraryFine = 0
+let otherFine = 0
+let conditionOfAdmission = 0
 
-let userID;
+let CreateUserID;
 
 
 const changeHandler = async () => {
@@ -44,6 +48,7 @@ const changeHandler = async () => {
   console.log(fileInput.files[0])
   axios.put("https://personal-eewexkfl.outsystemscloud.com/TrubaErp/rest/Image_To_ID/Image_To_ID", fileInput.files[0])
     .then((response) => {
+      message.success("Picture Uploaded")
       console.log(response.data)
       StudentPictureId = response.data["ImageID"]
       console.log(StudentPictureId)
@@ -51,40 +56,66 @@ const changeHandler = async () => {
 }
 
 const submitData = () => {
-  // Add User
-  const addUserbody = {
-    name: student_name,
-    username: student_username,
-    password: student_password,
-    picture: StudentPictureId,
-    role: "student"
+  function CreateUser() {
+    // Add User
+    const addUserbody = {
+      name: student_name,
+      username: student_username,
+      password: student_password,
+      picture: StudentPictureId,
+      role: "student"
+    }
+    axios.post("http://localhost:5000/admin-power/add-user", addUserbody)
+      .then((response) => {
+        message.success("addUserbody Processing complete!")
+        CreateUserID = response.data._id;
+        console.log(response.data._id)
+        console.log("=====================================")
+        UserDetails()
+      })
   }
-  axios.post("http://localhost:5000/admin-power/add-user", addUserbody)
-    .then((response) => {
-      message.success("addUserbody Processing complete!")
-      userID = response.data._id;
-      console.log(response.data._id)
-      console.log("=====================================")
-    })
 
-  
-  
-    // update Student by userId 
+  CreateUser()
 
-  const addStudentbody = {
-    picture:2,
-    email:student_eamil,
-    address:student_address,
-    phone:student_number,
-    alternativePhone : student_numberAlter,
-    education: EducationList
-}
-  axios.post(`http://localhost:5000/student/update-student/${userID}`, addStudentbody)
-    .then((response) => {
-      message.success("addUserbody Processing complete!")
-      console.log(response.data)
-      console.log("=====================================")
-    })
+
+  function UserDetails() {
+    // update Student by CreateUserID 
+
+    const addStudentbody = {
+      picture: 2,
+      email: student_eamil,
+      address: student_address,
+      phone: student_number,
+      alternativePhone: student_numberAlter,
+      education: EducationList
+    }
+    axios.post(`http://localhost:5000/student/update-student/${CreateUserID}`, addStudentbody)
+      .then((response) => {
+        message.success("Student Details Submited!")
+        console.log(response.data)
+        console.log("=====================================")
+        UpdateAccount()
+      })
+  }
+
+  function UpdateAccount() {
+    //update Account Details
+    const addStudentAccountbody = {
+      collegeTuitionFees: CollegeTuitionFees,
+      collegeBusFees: DevelopmentFees,
+      developmentFees: CollegeBusFees,
+      miscellaneousFees: MiscellaneousFees,
+      totalFees: CollegeTuitionFees + DevelopmentFees + CollegeBusFees + MiscellaneousFees,
+      paidAmount: paidAmount,
+      conditionOfAdmission: conditionOfAdmission
+    }
+    axios.post(`http://localhost:5000/accounts/update/${CreateUserID}`, addStudentAccountbody)
+      .then((response) => {
+        message.success("Student Account Details Submited!")
+        console.log(response.data)
+        console.log("=====================================")
+      })
+  }
 
 
 }
@@ -277,14 +308,14 @@ const FinalPage = () => {
           className="add_student_middle_general_info_input"
         >
           <h3>College Tuition Fees</h3>
-          <Input onChange={(e) => CollegeTuitionFees = e.target.value} />
+          <Input type={"number"} onChange={(e) => CollegeTuitionFees = e.target.value} />
         </div>
         <div
           style={{ flex: "0.4" }}
           className="add_student_middle_general_info_input"
         >
           <h3>College Bus Fees</h3>
-          <Input onChange={(e) => CollegeBusFees = e.target.value} />
+          <Input type={"number"} onChange={(e) => CollegeBusFees = e.target.value} />
         </div>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -293,14 +324,28 @@ const FinalPage = () => {
           className="add_student_middle_general_info_input"
         >
           <h3>Development Fees</h3>
-          <Input onChange={(e) => DevelopmentFees = e.target.value} />
+          <Input type={"number"} onChange={(e) => DevelopmentFees = e.target.value} />
         </div>
         <div
           style={{ flex: "0.4" }}
           className="add_student_middle_general_info_input"
         >
           <h3>Miscellaneous Fees</h3>
-          <Input onChange={(e) => MiscellaneousFees = e.target.value} />
+          <Input type={"number"} onChange={(e) => MiscellaneousFees = e.target.value} />
+        </div>
+        <div
+          style={{ flex: "0.4" }}
+          className="add_student_middle_general_info_input"
+        >
+          <h3>Paid Amount</h3>
+          <Input type={"number"} onChange={(e) => paidAmount = e.target.value} />
+        </div>
+        <div
+          style={{ flex: "0.4" }}
+          className="add_student_middle_general_info_input"
+        >
+          <h3>Condition Of Admission</h3>
+          <Input type={"text"} onChange={(e) => conditionOfAdmission = e.target.value} />
         </div>
       </div>
       <Divider />
