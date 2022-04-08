@@ -74,10 +74,7 @@ const submitData = () => {
         UserDetails()
       })
   }
-
   CreateUser()
-
-
   function UserDetails() {
     // update Student by CreateUserID 
 
@@ -97,7 +94,6 @@ const submitData = () => {
         UpdateAccount()
       })
   }
-
   function UpdateAccount() {
     //update Account Details
     const addStudentAccountbody = {
@@ -115,16 +111,43 @@ const submitData = () => {
         console.log(response.data)
         console.log("=====================================")
       })
+    SendWelcomeMail()
   }
 
+  function SendWelcomeMail() {
+    // send welcome mail 
+    const mailBody = {
+      "To": student_eamil,
+      "Subject": "Account Details",
+      "TopHeading": `Welcome to Truba Group ${student_name} !
+      Your Account is just Created Congrats!`,
+      "Content": `Hi
+${student_name},
+Its a pleasure having you with us on board.we are so glad that you are here, and it is going to be a great academic year! Every day we work hand in hand with parents, teachers, educators and community members to improve Truba's education system for students of all backgrounds and abilities. Our new site reflects this cooperative relationship and the role that so many Trubians play in ensuring student success.         
+
+
+Your User-Id = ${student_username}
+Your Password = ${student_password}
+
+
+`,
+      "Regards": "Truba Group Of Institution",
+      "ContactUs": "https://www.trubainstitute.ac.in/"
+    }
+    axios.post(`https://personal-eewexkfl.outsystemscloud.com/TrubaErp/rest/SendWelcomeMsg/Email`, mailBody)
+      .then((response) => {
+        message.success("Student Mail Send!")
+        alert(`Account Details is send to ${student_eamil}`)
+        console.log(response.data)
+        console.log("=====================================")
+      })
+  }
 
 }
 
 
 
 const StudentGeneralInfo = () => {
-
-
   return (
     <>
       <div className="add_student_top_general_info">
