@@ -40,10 +40,5 @@ router.post("/auth/v1/admin", async (req, res) => {
   }
 });
 
-// get image
-router.post("/get-image/v1", (req, res) => {
-  console.log(req.body);
-  res.send("heelo");
-});
 
 module.exports = router;

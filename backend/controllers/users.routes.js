@@ -104,7 +104,7 @@ router.put("/update-user/:id", (req, res) => {
         .catch((err) => res.status(501).json(err.message));
 });
 
-//login student and teacher
+//login student and teacher and admin
 router.post('/auth/v1/user',(req,res)=>{
     const username = req.body.username
     const password = req.body.password

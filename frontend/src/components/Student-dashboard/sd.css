@@ -57,6 +57,7 @@
   background-color: #eef2ff;
   border-radius: 20px;
   padding: 10px;
+  overflow-y: hidden;
 }
 .link-color {
   color: #fff;

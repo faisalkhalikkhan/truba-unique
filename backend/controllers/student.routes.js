@@ -12,6 +12,9 @@ router.post('/update-student/:id',(req,res)=>{
         address: req.body.address,
         phone: req.body.phone,
         alternativePhone: req.body.alternativePhone,
+        batch: req.body.batch,
+        semester: req.body.semester,
+        department: req.body.department,
         teachers: req.body.teachers,
         documents: req.body.documents,
         education: req.body.education

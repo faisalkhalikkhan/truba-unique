@@ -6,18 +6,12 @@ const studentDetails = mongoose.Schema({
     address: String,
     phone: String,
     alternativePhone: String,
+    batch: String,
+    semester: String,
+    department: String,
     teachers: [],
     documents: [],
     education: [],
-    // {
-    //     SchoolCollegeName: String,
-    //     Course: String,
-    //     Percentage: String,
-    //     Duration: {
-    //         StartDate: Date,
-    //         EndDate: Date,
-    //     }
-    // }
     lastUpdate: {
         type: Date,
         default: new Date()

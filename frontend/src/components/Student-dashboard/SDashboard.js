@@ -45,6 +45,11 @@ const SDashboard = () => {
               Apply For Leave
             </Link>
           </h3>
+          <h3>
+            <Link className="link-color" to="/student-dashboard/trugram">
+              Trugram
+            </Link>
+          </h3>
         </div>
         <div className="sdashboard_left_end">
           <button>LOGOUT</button>

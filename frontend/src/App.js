@@ -13,14 +13,17 @@ import ApplyForLeave from "./components/Student-dashboard/ApplyForLeave/ApplyFor
 import Page404 from "./reuseable-components/404/Page404";
 import Admin from "./components/Admin/Admin";
 import StudentAccount from "./components/Student-dashboard/Account/StudentAccount";
-
+import Trugram from './components/Trugram/Trugram'
 import Profile from "./components/Student-dashboard/Profile/Profile";
+import Overview from "./components/Admin/Overview/Overview";
+import Student from "./components/Admin/Student/Student";
+import AddStudent from "./components/Admin/Student/AddStudent";
 
-import TDashboard from "./components/Teacher-dashboard/TDashboard";
-import TTimeTable from "./components/Teacher-dashboard/TTimeTable/TTimeTable";
-import TAccount from "./components/Teacher-dashboard/TAccount/TAccount";
-import TStudents from "./components/Teacher-dashboard/TStudents/TStudents";
-import TDashboardContent from "./components/Teacher-dashboard/TDashboardContent/TDashboardContent";
+// import TDashboard from "./components/Teacher-dashboard/TDashboard";
+// import TTimeTable from "./components/Teacher-dashboard/TTimeTable/TTimeTable";
+// import TAccount from "./components/Teacher-dashboard/TAccount/TAccount";
+// import TStudents from "./components/Teacher-dashboard/TStudents/TStudents";
+// import TDashboardContent from "./components/Teacher-dashboard/TDashboardContent/TDashboardContent";
 
 function App() {
   const [loading, setLoader] = useState(false);
@@ -35,14 +38,20 @@ function App() {
           <Route path="apply-for-leave" element={<ApplyForLeave />} />
           <Route path="account" element={<StudentAccount />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="trugram" element={<Trugram />} />
         </Route>
-        <Route path="/teacher-dashboard" element={<TDashboard />}>
+        {/* <Route path="/teacher-dashboard" element={<TDashboard />}>
           <Route path="" element={<TDashboardContent/>} />
           <Route path="time-table" element={<TTimeTable />} />
           <Route path="students" element={<TStudents />} />
           <Route path="account" element={<TAccount />} />
+        </Route> */}
+        <Route path="/admin" exact element={<Admin />}>
+        <Route path="" element={<Overview />} />
+        <Route path="student" element={<Student />} />
+        <Route path="add-student" element={<AddStudent />} />
         </Route>
-        <Route path="/admin" exact element={<Admin />} />
+        {/* <Route path="/trugram"  element={<Trugram />} /> */}
         <Route path="*" element={<Page404 />} />
       </Routes>
       {loading && <Tspinner />}

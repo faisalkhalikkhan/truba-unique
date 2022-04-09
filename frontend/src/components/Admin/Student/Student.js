@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Avatar } from "antd";
 import "./s.css";
 import AddStudent from "./AddStudent";
+import { useNavigate } from "react-router-dom";
 
 const Student = () => {
-  const [showAddStudent , setAddStudent] = useState(false)
+  const navigate = useNavigate();
   return (
     <div className="student">
       <div
@@ -14,9 +15,14 @@ const Student = () => {
         }}
       >
         <h2>Student Panel</h2>
-        <button  className="logout_btn" onClick={()=>setAddStudent(!showAddStudent)}>Add Student</button>
+        <button
+          className="logout_btn"
+          onClick={() => navigate("/admin/add-student")}
+        >
+          Add Student
+        </button>
       </div>
-      <div style={{ display: `${showAddStudent ? "block" : "none"}` }}  className="student_container">
+      <div className="student_container">
         <div className="student_container_top">
           <div className="student_conatiner_studentList">
             <div className="student_conatiner_studentList_head">
@@ -97,7 +103,7 @@ const Student = () => {
         </div>
       </div>
 
-      <div style={{ display: `${showAddStudent ? "none" : "block"}` }} className="student_form">
+      <div style={{ display: "none" }} className="student_form">
         <AddStudent />
       </div>
     </div>

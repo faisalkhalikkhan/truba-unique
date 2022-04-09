@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   flex: 0.1;
+  cursor: pointer;
 }
 .admin_image {
   width: 70px;
