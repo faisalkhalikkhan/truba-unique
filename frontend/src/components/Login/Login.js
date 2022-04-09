@@ -6,9 +6,12 @@ import Lottie from "lottie-react";
 import axios from "axios";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/actions/user.action";
 
 const Login = () => {
   const nevigate = useNavigate();
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,19 +24,19 @@ const Login = () => {
       })
       .then((response) => {
         if (response.data.length > 0) {
-         
+          console.log(response.data[0]);
+          dispatch(setUser(response.data[0]));
           if (response.data[0]["role"] == "student") {
             message.success("Login Successfull");
             nevigate("/student-dashboard");
-          }
-          else if (response.data[0]["role"] == "teacher") {
+          } else if (response.data[0]["role"] == "teacher") {
             message.success("Login Successfull");
             nevigate("/teacher-dashboard");
+          } else {
+            message.success("Login Successfull");
+            nevigate("/admin");
           }
-          else{
-            message.error("user not found");
-          }
-        } else message.error("user not found");
+        } else message.error("user -->not found");
       })
       .catch((e) => {
         message.error("user not found");

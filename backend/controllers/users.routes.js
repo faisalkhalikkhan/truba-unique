@@ -37,7 +37,7 @@ router.post("/add-user", async (req, res) => {
     const password = req.body.password;
     const role = req.body.role;
     const picture = req.body.picture;
-    const adminId = req.session.adminId;
+    const adminId = (role == 'admin' ? "king" : req.session.adminId);
     const body = {
         name: name,
         username: username,
@@ -46,7 +46,6 @@ router.post("/add-user", async (req, res) => {
         picture : picture,
         adminId: adminId,
     };
-    console.log(body);
     const newUser = new User(body);
     try{
         await newUser.save();

@@ -7,6 +7,7 @@ router.get("/", (req, res) => {
   res.send(":)");
 });
 
+
 // for register new Admin
 router.post("/auth/v1/add-admin", async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./admin.css";
 import Avatar from "antd/lib/avatar/avatar";
 import {
@@ -10,15 +10,18 @@ import {
   TeamOutlined,
 } from "@ant-design/icons";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Admin = () => {
   const nevigateMe = useNavigate();
+  const user = useSelector((state) => state.user);
+  console.log("user idher h", user);
   return (
     <div className="admin">
       <div className="admin_left">
         <div className="admin_profile">
-          <Avatar className="admin_image" src="/boy.jpg" />
-          <h2>Admin</h2>
+          <Avatar className="admin_image" src={`https://personal-eewexkfl.outsystemscloud.com/TrubaErp/rest/Image_To_ID/ID_To_Image?ID=${user.pitcure}`}/>
+          <h2>{user.username}</h2>
         </div>
         <div className="admin_middle">
           <div onClick={() => nevigateMe("/admin")} className="admin_profile">
