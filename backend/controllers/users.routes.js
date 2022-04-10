@@ -66,13 +66,6 @@ router.post("/add-user", async (req, res) => {
             })
             teacher.save();
         }
-        else if(newUser.role == "admin"){
-            const addadmin = new admin({
-                adminId: newUser.id 
-            })
-            console.log("-=============================")
-            await addadmin.save();
-        }
         res.status(201).json(newUser);
     }
     catch{
@@ -130,6 +123,7 @@ router.post('/auth/v1/user',(req,res)=>{
             }
             else{
                 req.session.studentId = response[0]._id;
+                console.log(response);
                 console.log("student id > ",req.session.studentId);
             }
             res.status(201).json(response)

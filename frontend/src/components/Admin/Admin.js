@@ -15,7 +15,6 @@ import { useSelector } from "react-redux";
 const Admin = () => {
   const nevigateMe = useNavigate();
   const user = useSelector((state) => state.user);
-  console.log("user idher h", user);
   return (
     <div className="admin">
       <div className="admin_left">

@@ -2,12 +2,14 @@ import { SearchOutlined } from "@ant-design/icons/lib/icons";
 import React from "react";
 import "./d.css";
 import { Progress } from "antd";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const user = useSelector((state) => state.user);
   return (
     <div className="dashboard">
       <div className="dashboard_top">
-        <h2>Welcome Back, Faisal Khan</h2>
+        <h2>Welcome Back, {`${user.name}`}</h2>
         <form>
           <SearchOutlined style={{ fontSize: "large", fontWeight: "700" }} />
           <input id="search_input" placeholder="Search For Anything..." />

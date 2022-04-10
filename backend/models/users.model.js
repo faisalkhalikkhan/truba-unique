@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const newUser = mongoose.Schema({
   name: String,
-  email:String,
+  email: String,
   username: {
     type: String,
     required: [true, "Username required."],
-    index:true,
-    unique: true
+    index: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -15,7 +15,7 @@ const newUser = mongoose.Schema({
   },
   role: String,
   adminId: String,
-  picture : Number,
+  picture: String,
   createdAt: {
     type: Date,
     default: new Date(),

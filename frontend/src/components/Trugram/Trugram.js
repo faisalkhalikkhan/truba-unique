@@ -6,9 +6,11 @@ import Post from "./Posts/Post";
 import "./tg.css";
 import { db } from "../../firebase";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Trugram = () => {
   const [posts, setPosts] = useState([]);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     db.collection("posts")
@@ -41,11 +43,10 @@ const Trugram = () => {
     event.preventDefault();
 
     db.collection("posts").add({
-      username: "faisal",
+      username: user.username,
       message: input,
       timestamp: new Date(),
-      profilePic:
-        "https://personal-eewexkfl.outsystemscloud.com/TrubaErp/rest/Image_To_ID/ID_To_Image?ID=13",
+      profilePic: user.picture,
       pitcure: image,
     });
   };
@@ -55,8 +56,8 @@ const Trugram = () => {
         <div className="trugram__body_message_sender">
           <form onSubmit={onSubmitHandler}>
             <div className="trugram__body_message_sender_top">
-              <Avatar size={45} src="/boy.jpg" />
-              <h3>Faisal Khan</h3>
+              <Avatar size={45} src={`${user.picture}`} />
+              <h3>{user.name}</h3>
               <input
                 type="file"
                 accept="image/*"
@@ -85,7 +86,7 @@ const Trugram = () => {
                 }}
               />
               <Input
-              style={{marginLeft: "10px", marginRight: "10px"}}
+                style={{ marginLeft: "10px", marginRight: "10px" }}
                 placeholder="Whats in your mind,"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
