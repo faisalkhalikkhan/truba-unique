@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const User = require("../models/users.model");
-const TeacherDetails = require("../models/teacher.model")
-const StudentDetails = require("../models/student.model")
+const TeacherDetails = require("../models/teacher.model");
+const StudentDetails = require("../models/student.model");
 const StudentAccounts = require("../models/student.accounts.model");
+const admin = require("../models/admin.model");
 const CreateError = require('http-errors')
 
 
@@ -64,6 +65,13 @@ router.post("/add-user", async (req, res) => {
                 teacherId: newUser.id 
             })
             teacher.save();
+        }
+        else if(newUser.role == "admin"){
+            const addadmin = new admin({
+                adminId: newUser.id 
+            })
+            console.log("-=============================")
+            await addadmin.save();
         }
         res.status(201).json(newUser);
     }

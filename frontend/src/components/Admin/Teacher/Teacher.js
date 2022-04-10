@@ -1,37 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar } from "antd";
 import "./s.css";
-import AddStudent from "./AddStudent";
+import AddTeacher from "./AddTeacher";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Student = () => {
+const Teacher = () => {
   const navigate = useNavigate();
-  axios
-  .get(`http://localhost:5000/student/get-students`)
-  .then((response) => {
-    console.log(response.data);
-  });
+  const [teacherList, setTeacherList] = useState([])
+  useEffect(() => {
+    axios
+    .get(`http://localhost:5000/teacher/get-teachers`)
+    .then((response) => {
+      setTeacherList(response.data)
+      console.log(teacherList);
+    });
+  },[])
   return (
-    <div className="student">
+    <div className="Teacher">
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
         }}
       >
-        <h2>Student Panel</h2>
+        <h2>Teacher Panel</h2>
         <button
           className="logout_btn"
-          onClick={() => navigate("/admin/add-student")}
+          onClick={() => navigate("/admin/add-teacher")}
         >
-          Add Student
+          Add Teacher
         </button>
       </div>
-      <div className="student_container">
-        <div className="student_container_top">
-          <div className="student_conatiner_studentList">
-            <div className="student_conatiner_studentList_head">
+      <div className="Teacher_container">
+        <div className="Teacher_container_top">
+          <div className="Teacher_conatiner_TeacherList">
+            <div className="Teacher_conatiner_TeacherList_head">
               <h3
                 style={{
                   display: "flex",
@@ -41,7 +45,7 @@ const Student = () => {
                   color: "#46244c",
                 }}
               >
-                Student List
+                Teacher List
               </h3>
               <div
                 style={{
@@ -58,18 +62,23 @@ const Student = () => {
                 <h4 style={{ fontWeight: "600" }}>action</h4>
               </div>
             </div>
-            <div className="student_scroll">
-              <div className="student_list_item">
-                <Avatar src="/boy.jpg" size={45} />
-                <h3>Faisal Khan</h3>
-                <h4>Computer Science</h4>
-                <h3>0114CS181034</h3>
-                <button className="logout_btn">View</button>
-              </div>
+            <div className="Teacher_scroll">
+              {teacherList.map((item, index) => {
+                return (
+                  <div className="Teacher_list_item">
+                    <Avatar src={item.picture} size={45} />
+                    <h3>{item.name}</h3>
+                    <h4>Computer Science</h4>
+                    <h3>0114CS181034</h3>
+                    <button className="logout_btn">View</button>
+                  </div>
+                )
+              })}
+
             </div>
           </div>
-          <div className="student_application_box">
-            <div className="student_conatiner_studentList_head">
+          <div className="Teacher_application_box">
+            <div className="Teacher_conatiner_TeacherList_head">
               <h3
                 style={{
                   display: "flex",
@@ -79,7 +88,7 @@ const Student = () => {
                   color: "#46244c",
                 }}
               >
-                Student Application
+                Teacher Application
               </h3>
               <div
                 style={{
@@ -95,8 +104,8 @@ const Student = () => {
                 <h4 style={{ fontWeight: "600" }}>action</h4>
               </div>
             </div>
-            <div className="student_scroll">
-              <div className="student_list_item">
+            <div className="Teacher_scroll">
+              <div className="Teacher_list_item">
                 <h3>0114CS181034</h3>
                 <h4>I am suffering from fever</h4>
                 <h3>31/03/2022</h3>
@@ -109,11 +118,11 @@ const Student = () => {
         </div>
       </div>
 
-      <div style={{ display: "none" }} className="student_form">
-        <AddStudent />
+      <div style={{ display: "none" }} className="Teacher_form">
+        <AddTeacher />
       </div>
     </div>
   );
 };
 
-export default Student;
+export default Teacher;

@@ -1,12 +1,12 @@
-.student-account {
+.teacher-account {
   width: 100%;
   height: 100%;
 }
-.student_account_middle {
+.teacher_account_middle {
   display: flex;
   justify-content: space-evenly;
 }
-.student_account_middle_left {
+.teacher_account_middle_left {
   width: 650px;
   height: 350px;
   background: #fff;
@@ -17,10 +17,10 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
-.student_account_middle_left::-webkit-scrollbar {
+.teacher_account_middle_left::-webkit-scrollbar {
   display: none;
 }
-.student_account_middle_right {
+.teacher_account_middle_right {
   width: 400px;
   height: 350px;
   margin-left: 40px;
@@ -33,7 +33,7 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
-.student_account_end {
+.teacher_account_end {
   margin-top: 25px;
   background: #fff;
   height: 170px;
@@ -41,21 +41,21 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   padding: 5px;
 }
-.student_account_middle_right_top {
+.teacher_account_middle_right_top {
   width: 100%;
   padding: 10px;
 }
-.student_account_middle_right_top_item {
+.teacher_account_middle_right_top_item {
   display: flex;
   justify-content: space-between;
   padding-left: 15px;
   padding-right: 15px;
   margin-bottom: 20px;
 }
-.student_account_middle_right_top_item h3 {
+.teacher_account_middle_right_top_item h3 {
   font-weight: 600;
 }
-.student_account_end_top {
+.teacher_account_end_top {
   width: 100%;
   display: flex;
   align-items: center;

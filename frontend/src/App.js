@@ -18,6 +18,8 @@ import Profile from "./components/Student-dashboard/Profile/Profile";
 import Overview from "./components/Admin/Overview/Overview";
 import Student from "./components/Admin/Student/Student";
 import AddStudent from "./components/Admin/Student/AddStudent";
+import AddTeacher from "./components/Admin/Teacher/AddTeacher";
+import Teacher from "./components/Admin/Teacher/Teacher";
 
 // import TDashboard from "./components/Teacher-dashboard/TDashboard";
 // import TTimeTable from "./components/Teacher-dashboard/TTimeTable/TTimeTable";
@@ -50,6 +52,9 @@ function App() {
         <Route path="" element={<Overview />} />
         <Route path="student" element={<Student />} />
         <Route path="add-student" element={<AddStudent />} />
+        <Route path="teacher" element={<Teacher />} />
+        <Route path="add-teacher" element={<AddTeacher />} />
+
         </Route>
         {/* <Route path="/trugram"  element={<Trugram />} /> */}
         <Route path="*" element={<Page404 />} />

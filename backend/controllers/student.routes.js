@@ -7,6 +7,7 @@ router.post('/update-student/:id',(req,res)=>{
     const id = req.params.id;
 
     Student.findOneAndUpdate({ studentId: id },{
+        name:req.body.name,
         picture: req.body.picture,
         email: req.body.email,
         address: req.body.address,
@@ -22,6 +23,11 @@ router.post('/update-student/:id',(req,res)=>{
     .then((response) => res.status(201).json(response))
     .catch((err) => res.status(501).json(err.message));
 
+})
+router.get('/get-students',(req,res)=>{
+    Student.find()
+    .then((response) => res.status(201).json(response))
+    .catch((err) => res.status(501).json(err.message));
 })
 
 module.exports = router

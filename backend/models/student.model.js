@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const studentDetails = mongoose.Schema({
     studentId: String,
+    name: String,
     picture: Number,
     email: String,
     address: String,
