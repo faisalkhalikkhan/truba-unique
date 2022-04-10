@@ -55,7 +55,7 @@ const changeHandler = async () => {
     .then((response) => {
       message.success("Picture Uploaded");
       console.log(response.data);
-      StudentPictureId = response.data["ImageID"];
+      StudentPictureId = "https://personal-eewexkfl.outsystemscloud.com/TrubaErp/rest/Image_To_ID/ID_To_Image?ID="+response.data["ImageID"];
       console.log(StudentPictureId);
     });
 };
@@ -85,7 +85,8 @@ const submitData = () => {
     // update Student by CreateUserID
 
     const addStudentbody = {
-      picture: 2,
+      name : student_name,
+      picture: StudentPictureId,
       email: student_eamil,
       address: student_address,
       phone: student_number,

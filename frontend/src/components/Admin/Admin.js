@@ -29,11 +29,11 @@ const Admin = () => {
             <h3 style={{ color: "#46244c", fontSize: "15px" }}>Overview</h3>
           </div>
           <div
-            onClick={() => nevigateMe("/admin/staff")}
+            onClick={() => nevigateMe("/admin/teacher")}
             className="admin_profile"
           >
             <ContactsFilled style={{ color: "#46244c", fontSize: "15px" }} />
-            <h3 style={{ color: "#46244c", fontSize: "15px" }}>Staff</h3>
+            <h3 style={{ color: "#46244c", fontSize: "15px" }}>Teacher</h3>
           </div>
           <div
             onClick={() => nevigateMe("/admin/student")}
