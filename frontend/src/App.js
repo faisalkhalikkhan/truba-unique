@@ -21,11 +21,11 @@ import AddStudent from "./components/Admin/Student/AddStudent";
 import AddTeacher from "./components/Admin/Teacher/AddTeacher";
 import Teacher from "./components/Admin/Teacher/Teacher";
 
-// import TDashboard from "./components/Teacher-dashboard/TDashboard";
-// import TTimeTable from "./components/Teacher-dashboard/TTimeTable/TTimeTable";
-// import TAccount from "./components/Teacher-dashboard/TAccount/TAccount";
-// import TStudents from "./components/Teacher-dashboard/TStudents/TStudents";
-// import TDashboardContent from "./components/Teacher-dashboard/TDashboardContent/TDashboardContent";
+import TDashboard from "./components/Teacher-dashboard/TDashboard";
+import TTimeTable from "./components/Teacher-dashboard/TTimeTable/TTimeTable";
+import TAccount from "./components/Teacher-dashboard/TAccount/TAccount";
+import TStudents from "./components/Teacher-dashboard/TStudents/TStudents";
+import TDashboardContent from "./components/Teacher-dashboard/TDashboardContent/TDashboardContent";
 
 function App() {
   const [loading, setLoader] = useState(false);
@@ -42,12 +42,12 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="trugram" element={<Trugram />} />
         </Route>
-        {/* <Route path="/teacher-dashboard" element={<TDashboard />}>
+        <Route path="/teacher-dashboard" element={<TDashboard />}>
           <Route path="" element={<TDashboardContent/>} />
           <Route path="time-table" element={<TTimeTable />} />
           <Route path="students" element={<TStudents />} />
           <Route path="account" element={<TAccount />} />
-        </Route> */}
+        </Route>
         <Route path="/admin" exact element={<Admin />}>
         <Route path="" element={<Overview />} />
         <Route path="student" element={<Student />} />

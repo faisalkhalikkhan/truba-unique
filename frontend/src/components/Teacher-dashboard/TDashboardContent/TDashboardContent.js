@@ -1,139 +1,91 @@
 import { SearchOutlined } from "@ant-design/icons/lib/icons";
-import React from "react";
 import "./Td.css";
 import axios from "axios";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from "@mui/material/CardActions"
+import CardContent from '@mui/material/CardContent';
+import { useState, useEffect } from "react";
+import Typography from '@mui/material/Typography';
+import { ListGroup } from 'react-bootstrap'
 
 
-// axios
-//   .get("http://localhost:5000/admin-power/get-all-users")
-//   .then((response) => console.log(response.data))
 
 
 const TDashboardContent = () => {
+  const [Students, setStudents] = useState([]);
+  const fetchStudents = async () => {
+    const { data } = await axios.get(
+      "http://localhost:5000/student/get-students"
+    )
+    const Students = data;
+    setStudents(Students);
+    console.log(Students["length"]);
+  };
+  const [teachers, setteachers] = useState([]);
+  const fetchteachers = async () => {
+    const { data } = await axios.get(
+      "http://localhost:5000/teacher/get-teachers"
+    )
+    const teachers = data;
+    setteachers(teachers);
+    console.log(teachers["length"]);
+  };
+
+
+  useEffect(() => {
+    fetchStudents();
+    fetchteachers();
+  }, []);
   return (
-    <div className="dashboard">
-      <div className="breadcrumbs-area">
-        <h3>Dashboard</h3>
+    <div>
+      <div style={{ "display": "flex", "justifyContent": "space-between" }}>
+        <Card style={{ "alignItems": "center", "display": "inline-block" }} sx={{ maxWidth: 345 }} >
+          <img src="https://cdn.ila-france.com/wp-content/uploads/2015/02/our-students.jpg" style={{ "height": "200px", "width": "300px" }}></img>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div" style={{ "padding": "auto" }}>
+              Total Students
+            </Typography>
+            <Typography gutterBottom variant="h6" component="div" style={{ "padding": "auto" }}>
+              {Students["length"]}  and Counting.....
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Lizards are a widespread group of squamate reptiles, with over 6,000
+              species, ranging across all continents except Antarctica
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card style={{ "alignItems": "center", "display": "inline-block" }} sx={{ maxWidth: 345 }} >
+          <img src="https://media.edutopia.org/styles/responsive_2880px_16x9/s3/masters/d7_images/cover_media/alber-169hero-thelook-shutterstock_0.jpg" style={{ "height": "200px", "width": "300px" }}></img>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div" style={{ "padding": "auto" }}>
+              Total Teachers
+            </Typography>
+            <Typography gutterBottom variant="h6" component="div" style={{ "padding": "auto" }}>
+              {teachers["length"]}  and Counting.....
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Lizards are a widespread group of squamate reptiles, with over 6,000
+              species, ranging across all continents except Antarctica
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card style={{ "alignItems": "center", "display": "inline-block" }} sx={{ maxWidth: 345 }} >
+          <img src="https://cdn.lifehack.org/wp-content/uploads/2014/02/40-Inspirational-Quotes-Every-Graduate-Student-Should-Know1.jpg" style={{ "height": "200px", "width": "300px" }}></img>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div" style={{ "padding": "auto" }}>
+              Total Graduated Students
+            </Typography>
+            <Typography gutterBottom variant="h6" component="div" style={{ "padding": "auto" }}>
+              433 Student has successfully completly graduated.....
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Lizards are a widespread group of squamate reptiles, with over 6,000
+              species, ranging across all continents except Antarctica
+            </Typography>
+          </CardContent>
+        </Card>
       </div>
-      <div className="row">
-
-        <div className="col-12 col-4-xxxl">
-          <div className="row">
-            <div className="col-6-xxxl col-lg-3 col-sm-6 col-12">
-              <div className="dashboard-summery-two">
-                <div className="item-icon bg-light-magenta">
-                  <i className="flaticon-classmates text-magenta" />
-                </div>
-                <div className="item-content">
-                  <div className="item-number"><span className="counter" data-num={35000}>35,000</span>
-                  </div>
-                  <div className="item-title">Total Students</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-6-xxxl col-lg-3 col-sm-6 col-12">
-              <div className="dashboard-summery-two">
-                <div className="item-icon bg-light-blue">
-                  <i className="flaticon-shopping-list text-blue" />
-                </div>
-                <div className="item-content">
-                  <div className="item-number"><span className="counter" data-num={19050}>19,050</span>
-                  </div>
-                  <div className="item-title">Total Exams</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-6-xxxl col-lg-3 col-sm-6 col-12">
-              <div className="dashboard-summery-two">
-                <div className="item-icon bg-light-yellow">
-                  <i className="flaticon-mortarboard text-orange" />
-                </div>
-                <div className="item-content">
-                  <div className="item-number"><span className="counter" data-num={23890}>23,890</span>
-                  </div>
-                  <div className="item-title">Graduate Studes</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-6-xxxl col-lg-3 col-sm-6 col-12">
-              <div className="dashboard-summery-two">
-                <div className="item-icon bg-light-red">
-                  <i className="flaticon-money text-red" />
-                </div>
-                <div className="item-content">
-                  <div className="item-number"><span>$</span><span className="counter" data-num={2102050}>21,02,050</span></div>
-                  <div className="item-title">Total Teachers</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Dashboard summery End Here */}
-        {/* Students Chart End Here */}
-
-        {/* Students Chart End Here */}
-        {/* Notice Board Start Here */}
-        <div className="col-lg-6 ">
-          <div className="card dashboard-card-six">
-            <div className="card-body">
-              <div className="heading-layout1 mg-b-17">
-                <div className="item-title">
-                  <h3>Notifications</h3>
-                </div>
-                <div className="dropdown">
-                  <a className="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">...</a>
-                  <div className="dropdown-menu dropdown-menu-right">
-                    <a className="dropdown-item" href="#"><i className="fas fa-times text-orange-red" />Close</a>
-                    <a className="dropdown-item" href="#"><i className="fas fa-cogs text-dark-pastel-green" />Edit</a>
-                    <a className="dropdown-item" href="#"><i className="fas fa-redo-alt text-orange-peel" />Refresh</a>
-                  </div>
-                </div>
-              </div>
-              <div className="notice-box-wrap">
-                <div className="notice-list">
-                  <div className="post-date bg-skyblue">16 June, 2019</div>
-                  <h6 className="notice-title"><a href="#">Great School manag mene esom tus eleifend
-                    lectus
-                    sed maximus mi faucibusnting.</a></h6>
-                  <div className="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                </div>
-                <div className="notice-list">
-                  <div className="post-date bg-yellow">16 June, 2019</div>
-                  <h6 className="notice-title"><a href="#">Great School manag printing.</a></h6>
-                  <div className="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                </div>
-                <div className="notice-list">
-                  <div className="post-date bg-pink">16 June, 2019</div>
-                  <h6 className="notice-title"><a href="#">Great School manag Nulla rhoncus eleifensed
-                    mim
-                    us mi faucibus id. Mauris vestibulum non purus lobortismenearea</a></h6>
-                  <div className="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                </div>
-                <div className="notice-list">
-                  <div className="post-date bg-skyblue">16 June, 2019</div>
-                  <h6 className="notice-title"><a href="#">Great School manag mene esom text of the
-                    printing.</a></h6>
-                  <div className="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                </div>
-                <div className="notice-list">
-                  <div className="post-date bg-yellow">16 June, 2019</div>
-                  <h6 className="notice-title"><a href="#">Great School manag printing.</a></h6>
-                  <div className="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                </div>
-                <div className="notice-list">
-                  <div className="post-date bg-pink">16 June, 2019</div>
-                  <h6 className="notice-title"><a href="#">Great School manag meneesom.</a></h6>
-                  <div className="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Notice Board End Here */}
-      </div>
-
-
-      <div className="dashboard_end"></div>
     </div>
   );
 };

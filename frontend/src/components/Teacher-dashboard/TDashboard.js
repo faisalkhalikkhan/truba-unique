@@ -13,7 +13,7 @@ const TDashboard = () => {
         <div className="tdashboard_left_top">
           <Avatar src="./boy.jpg" style={{ width: "70px", height: "70px" }} />
           <h3 style={{ color: "white", fontWeight: "700", cursor: "pointer" }}>
-            Faisal Khan<br></br> teacher
+            Faisal Khan<br></br>
           </h3>
         </div>
         <div className="tdashboard_left_middle">
@@ -24,10 +24,10 @@ const TDashboard = () => {
           <h3>
             <Link className="link-color" to="/teacher-dashboard/time-table">Time Table </Link>{" "}
           </h3>
-          <h3>
+          {/* <h3>
             {" "}
             <Link className="link-color" to="/teacher-dashboard/account">Accounts</Link>
-          </h3>
+          </h3> */}
           <h3>
             <Link className="link-color" to="/teacher-dashboard/Students">Student</Link>
           </h3>

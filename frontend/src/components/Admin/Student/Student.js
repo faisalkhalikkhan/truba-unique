@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar } from "antd";
 import "./s.css";
 import AddStudent from "./AddStudent";
@@ -7,11 +7,16 @@ import axios from "axios";
 
 const Student = () => {
   const navigate = useNavigate();
-  axios
-  .get(`http://localhost:5000/student/get-students`)
-  .then((response) => {
-    console.log(response.data);
-  });
+  const [studentList, setstudentList] = useState([])
+  useEffect(() => {
+    axios
+    .get(`http://localhost:5000/student/get-students`)
+    .then((response) => {
+      setstudentList(response.data)
+      console.log(response.data)
+      console.log(studentList);
+    });
+  },[])
   return (
     <div className="student">
       <div
@@ -47,8 +52,8 @@ const Student = () => {
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
+                  paddingLeft: "30px",
+                  paddingRight: "30px",
                 }}
               >
                 <h4 style={{ fontWeight: "600" }}>Photo</h4>
@@ -59,13 +64,17 @@ const Student = () => {
               </div>
             </div>
             <div className="student_scroll">
-              <div className="student_list_item">
-                <Avatar src="/boy.jpg" size={45} />
-                <h3>Faisal Khan</h3>
-                <h4>Computer Science</h4>
-                <h3>0114CS181034</h3>
-                <button className="logout_btn">View</button>
-              </div>
+            {studentList.map((item, index) => {
+                return (
+                  <div className="Teacher_list_item">
+                    <Avatar src={item.picture} size={45} />
+                    <h3>{item.name}</h3>
+                    <h4>{item.department}</h4>
+                    <h3>{"TRUBA"+item.studentId}</h3>
+                    <button  className="logout_btn">View</button>
+                  </div>
+                )
+              })}
             </div>
           </div>
           <div className="student_application_box">
@@ -73,10 +82,11 @@ const Student = () => {
               <h3
                 style={{
                   display: "flex",
-                  justifyContent: "center",
+                  justifyContent: "space-between",
                   alignItems: "center",
                   fontWeight: "600",
                   color: "#46244c",
+                  
                 }}
               >
                 Student Application
