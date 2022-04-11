@@ -1,0 +1,59 @@
+.new_footer {
+  position: relative;
+  display: flex;
+}
+.new_footer_main {
+  background: #000;
+  color: #fff;
+  width: 65%;
+  /* border-radius: 0% 100% 100% 0% / 0% 100% 0% 100%; */
+  border-radius: 0px 122px 0px 0px / 0px 101px 0px 0px;
+}
+.new_footer_bottom {
+  display: flex;
+  width: 150%;
+  justify-content: space-between;
+  padding-bottom: 0px;
+}
+.helpandSupport {
+  background: #c65d7b;
+  color: #fff;
+  font-size: larger;
+  font-weight: 700;
+  position: relative;
+  margin-bottom: 0;
+  bottom: 0;
+  margin-left: 155px;
+  padding: 5px;
+  border-radius: 15px 15px 0px 0px;
+  cursor: pointer;
+}
+.new_footer_grid {
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+.new_footer_grid_h3 {
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.new_footer__icons_div {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.new_footer__icons {
+  font-size: 22px;
+  color: #781c68;
+  margin-right: 25px;
+  cursor: pointer;
+}
+.new_footer_bottom p {
+  margin-bottom: 0px;
+  padding-top: 15px;
+  flex: 0.7;
+  padding-left: 50%;
+}

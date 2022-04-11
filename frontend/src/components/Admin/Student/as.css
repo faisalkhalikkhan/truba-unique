@@ -1,0 +1,39 @@
+.admin-add-student {
+  padding: 15px;
+}
+.add-student {
+  width: 100%;
+  height: 100%;
+}
+.add_student_top_general_info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.add_student_middle_general_info_input {
+  margin-bottom: 15px;
+}
+.education-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.education-student-list {
+  width: 100%;
+  height: 300px;
+  padding: 20px;
+  overflow-y: scroll;
+}
+.final-page {
+  padding: 20px;
+}
+.education-history {
+  padding: 10px;
+}

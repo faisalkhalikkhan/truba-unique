@@ -1,0 +1,56 @@
+.admin {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+.admin_profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0.1;
+  cursor: pointer;
+}
+.admin_image {
+  width: 70px;
+  height: 65px;
+}
+
+.admin_left {
+  flex: 0.1;
+  padding-top: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.admin_middle {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.admin_end {
+  flex: 0.1;
+}
+
+.logout_btn {
+  border-radius: 99999px;
+  width: 90px;
+  border: none;
+  background-color: #46244c;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 3px;
+  cursor: pointer;
+  height: 28px;
+}
+.admin_right {
+  flex: 0.9;
+}

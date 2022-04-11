@@ -1,0 +1,30 @@
+.mobileC {
+  margin-bottom: 35px;
+  height: 550px;
+}
+.mobileC_color_box {
+  background-color: #9f1861;
+  width: 80%;
+  height: 180px;
+  position: absolute;
+  z-index: -1;
+  padding-top: 15px;
+  padding-left: 10px;
+}
+.mobileC_box {
+  padding: 5px;
+  width: 330px;
+  margin-left: 25px;
+  margin-top: 15px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding-bottom: 10px;
+}
+
+.mobileC_box h1 {
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.mobileC_box p {
+  font-style: italic;
+}

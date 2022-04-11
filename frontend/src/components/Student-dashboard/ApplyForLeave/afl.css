@@ -1,0 +1,36 @@
+.apply_for_leaves {
+  width: 100%;
+  height: 100%;
+}
+.apply_for_leave_mid {
+  overflow-y: scroll;
+  height: 85vh;
+}
+.apply_for_leave_mid::-webkit-scrollbar {
+  display: none;
+}
+.apply_for_leaves_form {
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  padding: 15px;
+  border-radius: 10px;
+}
+.apply_for_leave_flex {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.apply_for_leaves_status {
+  background: #fff;
+  margin-top: 25px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.apply_for_leaves_status_item {
+  display: flex;
+  justify-content: space-between;
+}

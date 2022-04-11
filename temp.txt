@@ -1,0 +1,70 @@
+--------------- For Admin Signup ------------
+https:localhost:5000/admin/auth/v1/add-admin
+----------------------------------------------
+
+--------------- For Admin Login ------------
+http://localhost:5000/admin/auth/v1/admin
+----------------------------------------------
+
+--------------- For Adding user------------
+http://localhost:5000/admin-power/add-user
+----------------------------------------------
+
+--------------- For Delete user------------
+http://localhost:5000/admin-power/delete-user/{6173f1875c77f7abd9fed189}
+----------------------------------------------
+
+--------------- For Update user------------
+http://localhost:5000/admin-power/update-user/{6173f1875c77f7abd9fed189}
+----------------------------------------------
+
+--------------- For Get All users------------
+http://localhost:5000/admin-power/all-users/{6173f1875c77f7abd9fed189}
+----------------------------------------------
+
+--------------- For Get All application user------------
+http://localhost:5000/admin-power/get-all-users
+----------------------------------------------
+
+
+--------------- For Get User By ID------------
+http://localhost:5000/admin-power/user/{61754e441eddc60630e31024}
+----------------------------------------------
+
+--------------- For Login User (teacher , student)------------
+http://localhost:5000/admin-power/auth/v1/user
+--------------------------------------------------------
+
+--------------- For adding book------------
+http://localhost:5000/book/add-book
+
+method => post 
+request in body = > {
+	    "name": "Maths",
+        "lastHand": "Gourav",
+        "author": "RD Sharma",
+        "idle": true
+}
+--------------------------------------------------------
+
+--------------- For Search book(with name reguler expression added)------------
+
+http://localhost:5000/book/search-book/name
+
+method => get 
+
+--------------------------------------------------------
+
+--------------- For Search book with last hand (with name of student reguler expression added)------------
+
+http://localhost:5000/book/search-book-byLastHand/gourav
+
+method => get 
+
+--------------------------------------------------------
+
+
+---------------- Get All Students -----------
+http://localhost:5000/student/get-students
+--------------------------------------------
+
