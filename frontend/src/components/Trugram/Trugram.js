@@ -60,7 +60,7 @@ const Trugram = () => {
               <h3>{user.name}</h3>
               <input
                 type="file"
-                accept="image/*"
+                accept="image/jpeg"
                 id="fileInput"
                 onChange={handleImageUpload}
                 style={{ display: "none" }}
