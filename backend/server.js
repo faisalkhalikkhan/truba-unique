@@ -43,6 +43,8 @@ app.use("/book", addBook);
 const updateStudentAccounts = require("./controllers/student.account.routes");
 app.use("/accounts", updateStudentAccounts);
 
+const application = require('./controllers/application.routes')
+app.use('/leave', application)
 // Check Connection
 mongooes
   .connect(DBCONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })

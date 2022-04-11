@@ -42,6 +42,13 @@ const Admin = () => {
             <h3 style={{ color: "#46244c", fontSize: "15px" }}>Students</h3>
           </div>
           <div
+            onClick={() => nevigateMe("/admin/trugram")}
+            className="admin_profile"
+          >
+            <TeamOutlined style={{ color: "#46244c", fontSize: "15px" }} />
+            <h3 style={{ color: "#46244c", fontSize: "15px" }}>Trugram</h3>
+          </div>
+          <div
             onClick={() => nevigateMe("/admin/attendance")}
             className="admin_profile"
           >

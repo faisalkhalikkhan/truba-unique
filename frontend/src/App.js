@@ -47,6 +47,7 @@ function App() {
           <Route path="time-table" element={<TTimeTable />} />
           <Route path="students" element={<TStudents />} />
           <Route path="account" element={<TAccount />} />
+          <Route path="trugram" element={<Trugram />} />
         </Route>
         <Route path="/admin" exact element={<Admin />}>
         <Route path="" element={<Overview />} />
@@ -54,6 +55,7 @@ function App() {
         <Route path="add-student" element={<AddStudent />} />
         <Route path="teacher" element={<Teacher />} />
         <Route path="add-teacher" element={<AddTeacher />} />
+        <Route path="trugram" element={<Trugram />} />
 
         </Route>
         {/* <Route path="/trugram"  element={<Trugram />} /> */}
